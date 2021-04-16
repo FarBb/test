@@ -71,7 +71,7 @@ if (isset($_SESSION['login'])) {
                       <h1 class="h4 text-gray-900">Halaman Login Ujian</h1>
                     </div>
                     <div class="text-center">
-                      <img style="margin-bottom: 10px;" src="<?= base_url('assets/img/images.png') ?>" alt="logo sekolah" width="200px">
+                      <img style="margin-bottom: 10px;" src="<?= base_url('assets/img/logo.png') ?>" alt="logo sekolah" width="200px">
                     </div>
                     <?php if (isset($error)) : ?>
                       <div class="row">
