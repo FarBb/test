@@ -68,7 +68,7 @@ $id = $c['id'];
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="?page=dashboard">
+        <a class="nav-link" href="index.php?dashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -83,13 +83,13 @@ $id = $c['id'];
       </div>
 
       <li class="nav-item">
-        <a class="nav-link" href="?page=menu_ujian">
+        <a class="nav-link" href="?menu_ujian">
           <i class="fas fa-fw fa-clipboard-list"></i>
           <span>Menu Ujian</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="?page=hasil">
+        <a class="nav-link" href="?hasil">
           <i class="fas fa-fw fa-atom"></i>
           <span>Hasil Test</span></a>
       </li>

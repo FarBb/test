@@ -66,6 +66,10 @@
 <script src="<?= base_url('assets/js/sweetalert2.all.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/main.js') ?>"></script>
 
+<!-- Script Timer Soal -->
+<script src="<?= base_url('assets/js/timerSoal.js') ?>"></script>
+
+
 </body>
 
 </html>

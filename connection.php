@@ -21,3 +21,14 @@ function base_url($url = null)
     return $base_url;
   }
 }
+
+function query($kuery)
+{
+  global $conn;
+  $result = mysqli_query($conn, $kuery);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+  return $rows;
+}

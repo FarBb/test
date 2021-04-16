@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
       $_SESSION["id"] = $row["id"];
       $_SESSION['username'] = $user;
       $_SESSION['masuk'] = 'selamatDatang';
-      header("Location:dashboard");
+      header("Location:dashboard/index.php?dashboard");
       exit;
     } else {
       $error = true;
