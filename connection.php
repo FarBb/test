@@ -32,3 +32,33 @@ function query($kuery)
   }
   return $rows;
 }
+
+function register($data)
+{
+  global $conn;
+
+  $nama  = stripslashes($data["name"]);
+  $user  = strtolower(stripslashes($data["username"]));
+  $pass  = $data["password1"];
+  $pass1 = $data["password2"];
+
+  $cek_username = mysqli_query($conn, "SELECT * FROM tb_users WHERE username = '$user'");
+
+  if (mysqli_fetch_assoc($cek_username)) {
+    header("Location:registrasi.php?error");
+    return false;
+  }
+
+  if ($pass !== $pass1) {
+    header("Location:registrasi.php?error1");
+    return false;
+  }
+
+  $enkripsi_password = password_hash($pass, PASSWORD_DEFAULT);
+
+  $query = "INSERT INTO tb_users VALUES ('','$nama','$user','$enkripsi_password')";
+
+  mysqli_query($conn, $query);
+
+  return mysqli_affected_rows($conn);
+}

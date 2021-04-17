@@ -73,6 +73,7 @@ if (isset($_SESSION['login'])) {
                     <div class="text-center">
                       <img style="margin-bottom: 10px;" src="<?= base_url('assets/img/logo.png') ?>" alt="logo sekolah" width="200px">
                     </div>
+
                     <?php if (isset($error)) : ?>
                       <div class="row">
                         <div class="col-lg-12" col-lg-offset-3>
@@ -87,6 +88,21 @@ if (isset($_SESSION['login'])) {
                         </div>
                       </div>
                     <?php endif; ?>
+                    <?php if (isset($_GET["success"])) : ?>
+                      <div class="row">
+                        <div class="col-lg-12" col-lg-offset-3>
+                          <div class="alert alert-success alert-dismissable" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <div class="text-center">
+                              <span class="glyphicon glyphicon-exclamation-sign" arial-hidden="true"></span>
+                              <strong>Registrasi Berhasil!</strong> <br>
+                              Silahkan login!
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <?php endif; ?>
+
                     <form class="user" method="POST" action="">
                       <div class="form-group">
                         <input type="text" autofocus autocomplete="off" class="form-control form-control-user" id="exampleInputEmail" placeholder="Enter Your Username" name="username" required>
@@ -100,6 +116,10 @@ if (isset($_SESSION['login'])) {
                     </form>
                   </div>
                 </div>
+              </div>
+              <hr>
+              <div class="text-center" style="margin-top: -10px; margin-bottom:10px !important">
+                <a class="small" href="registrasi.php">Buat Akun</a>
               </div>
             </div>
           </div>
