@@ -19,7 +19,7 @@
                     <tr>
                       <td style="padding-right: 20px; padding-left: 10px">2.</td>
                       <td style="padding-left: 10px">
-                        Soal dilengkapi dengan waktu, lama pengerjaan soal 2 menit. Jika waktu sudah habis, maka jawaban akan otomatis tersimpan di system. Dan nilai akan keluar.
+                        Soal dilengkapi dengan waktu, Masing-masing soal diberi waktu 10 detik untuk menjawab. Jika waktu sudah habis, maka jawaban akan otomatis tersimpan di system. Dan akan lanjut ke soal berikutnya.
                       </td>
                     </tr>
                     <tr>

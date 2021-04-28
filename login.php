@@ -19,10 +19,15 @@ if (isset($_POST['login'])) {
       header("Location:dashboard/index.php?dashboard");
       exit;
     } else {
-      $error = true;
+      // $error = true;
+      $_SESSION['error'] = '';
+      header("Location:" . $_SERVER['PHP_SELF']);
+      exit;
     }
   }
-  $error = true;
+  $_SESSION['error'] = '';
+  header("Location:" . $_SERVER['PHP_SELF']);
+  exit;
 }
 // apabila ada session login maka tetap dihalaman index.php
 if (isset($_SESSION['login'])) {
@@ -44,6 +49,8 @@ if (isset($_SESSION['login'])) {
     <title>Login | Soal Online</title>
 
     <!-- Custom fonts for this template-->
+    <link rel="shortcut icon" href="<?= base_url('assets/img/logo.png') ?>" type="image/x-icon">
+
     <link href="<?= base_url('assets/') ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -74,7 +81,7 @@ if (isset($_SESSION['login'])) {
                       <img style="margin-bottom: 10px;" src="<?= base_url('assets/img/logo.png') ?>" alt="logo sekolah" width="200px">
                     </div>
 
-                    <?php if (isset($error)) : ?>
+                    <?php if (isset($_SESSION['error'])) : ?>
                       <div class="row">
                         <div class="col-lg-12" col-lg-offset-3>
                           <div class="alert alert-danger alert-dismissable" role="alert">
@@ -87,8 +94,26 @@ if (isset($_SESSION['login'])) {
                           </div>
                         </div>
                       </div>
-                    <?php endif; ?>
-                    <?php if (isset($_GET["success"])) : ?>
+                    <?php unset($_SESSION['error']);
+                    endif; ?>
+
+                    <?php if (isset($_SESSION['logout'])) : ?>
+                      <div class="row">
+                        <div class="col-lg-12" col-lg-offset-3>
+                          <div class="alert alert-danger alert-dismissable" role="alert">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <div class="text-center">
+                              <span class="glyphicon glyphicon-exclamation-sign" arial-hidden="true"></span>
+                              <strong>Login Gagal!</strong> <br>
+                              Username dan password salah
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <?php unset($_SESSION['logout']);
+                    endif; ?>
+
+                    <?php if (isset($_SESSION["success"])) : ?>
                       <div class="row">
                         <div class="col-lg-12" col-lg-offset-3>
                           <div class="alert alert-success alert-dismissable" role="alert">
@@ -101,7 +126,8 @@ if (isset($_SESSION['login'])) {
                           </div>
                         </div>
                       </div>
-                    <?php endif; ?>
+                    <?php unset($_SESSION['success']);
+                    endif; ?>
 
                     <form class="user" method="POST" action="">
                       <div class="form-group">

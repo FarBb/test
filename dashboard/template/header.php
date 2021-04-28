@@ -15,6 +15,19 @@ $c = mysqli_fetch_assoc($q);
 $id = $c['id'];
 ?>
 
+<?php
+if (isset($_GET['dashboard'])) {
+  $_SESSION['menu'] = 'dashboard';
+} elseif (isset($_GET['menu_ujian'])) {
+  $_SESSION['menu'] = 'menu_ujian';
+} elseif (isset($_GET['tes'])) {
+  $_SESSION['menu'] = 'tes';
+} elseif (isset($_GET['hasil'])) {
+  $_SESSION['menu'] = 'hasil';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +41,7 @@ $id = $c['id'];
 
   <title>Ujian Online | Mochammad Faris</title>
 
+  <link rel="shortcut icon" href="<?= base_url('assets/img/logo.png') ?>" type="image/x-icon">
   <!-- Custom fonts for this template-->
   <link href="<?= base_url('assets/') ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -40,6 +54,10 @@ $id = $c['id'];
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <!-- Core plugin JavaScript-->
+
+  <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
+  <script src="<?= base_url('assets/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
 
 </head>
@@ -67,13 +85,11 @@ $id = $c['id'];
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item <?php if ($_SESSION['menu'] == 'dashboard') echo 'active'; ?>">
         <a class="nav-link" href="index.php?dashboard">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-
-
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -82,13 +98,13 @@ $id = $c['id'];
         Menu
       </div>
 
-      <li class="nav-item">
+      <li class="nav-item <?php if ($_SESSION['menu'] == 'menu_ujian' || $_SESSION['menu'] == 'tes')  echo 'active'; ?>">
         <a class="nav-link" href="?menu_ujian">
           <i class="fas fa-fw fa-clipboard-list"></i>
           <span>Menu Ujian</span></a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item <?php if ($_SESSION['menu'] == 'hasil') echo 'active'; ?>">
         <a class="nav-link" href="?hasil">
           <i class="fas fa-fw fa-atom"></i>
           <span>Hasil Test</span></a>

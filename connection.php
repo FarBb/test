@@ -1,5 +1,5 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 $servername = 'localhost';
 $username   = 'root';
@@ -45,12 +45,16 @@ function register($data)
   $cek_username = mysqli_query($conn, "SELECT * FROM tb_users WHERE username = '$user'");
 
   if (mysqli_fetch_assoc($cek_username)) {
-    header("Location:registrasi.php?error");
+    $_SESSION['error'] = 'Username Sudah Terdaftar';
+    header("Location:registrasi.php");
+    exit(0);
     return false;
   }
 
   if ($pass !== $pass1) {
-    header("Location:registrasi.php?error1");
+    $_SESSION['error1'] = 'Username Sudah Terdaftar';
+    header("Location:registrasi.php");
+    exit(0);
     return false;
   }
 

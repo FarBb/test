@@ -1,9 +1,14 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) session_start();
 require 'connection.php';
+// $err = false;
+// if ($_SESSION['error'] != '') $err = true;
 
 if (isset($_POST["register"])) {
   if (register($_POST) > 0) {
-    header("Location: login.php?success");
+    $_SESSION['success'] = true;
+    header("Location: login.php");
+    exit;
   } else {
     echo mysqli_error($conn);
   }
@@ -14,12 +19,12 @@ if (isset($_POST["register"])) {
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="Mochammad Faris">
+  <link rel="shortcut icon" href="<?= base_url('assets/img/logo.png') ?>" type="image/x-icon">
 
   <title>Register</title>
 
@@ -48,10 +53,9 @@ if (isset($_POST["register"])) {
               <div class="text-center">
                 <img src="<?= base_url('assets/img/logo.png') ?>" alt="" width="200px" style="margin-bottom: 10px;">
               </div>
-
               <?php
-              if (isset($_GET['error'])) : ?>
-                <div class="row">
+              if (isset($_SESSION['error'])) {
+                echo ' <div class="row">
                   <div class="col-lg-12" col-lg-offset-3>
                     <div class="alert alert-danger alert-dismissable" role="alert">
                       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -62,11 +66,13 @@ if (isset($_POST["register"])) {
                       </div>
                     </div>
                   </div>
-                </div>
-              <?php endif; ?>
+                </div>';
+              }
+              unset($_SESSION['error']);
+              ?>
 
               <?php
-              if (isset($_GET['error1'])) : ?>
+              if (isset($_SESSION['error1'])) : ?>
                 <div class="row">
                   <div class="col-lg-12" col-lg-offset-3>
                     <div class="alert alert-danger alert-dismissable" role="alert">
@@ -79,7 +85,8 @@ if (isset($_POST["register"])) {
                     </div>
                   </div>
                 </div>
-              <?php endif; ?>
+              <?php unset($_SESSION['error1']);
+              endif; ?>
 
               <form class="user" method="POST">
                 <div class="form-group row">
@@ -106,7 +113,7 @@ if (isset($_POST["register"])) {
         </div>
         <hr style="margin-top: -15px">
         <div class="text-center" style="margin-top: -10px; margin-bottom:10px !important">
-          <a class="small" href="registrasi.php">Sudah Punya Akun!</a>
+          <a class="small" href="login.php">Sudah Punya Akun!</a>
         </div>
       </div>
     </div>

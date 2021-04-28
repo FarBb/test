@@ -1,5 +1,4 @@
 <?php
-
 $id_user = $_SESSION['id'];
 
 //Mengecek apakah user sudah memiliki skor atau tidak
@@ -78,52 +77,76 @@ if ($jmlJawabUser == $jumlahSoal) {
     }
 
     $jawaban = mysqli_query($conn, "SELECT * from tb_jawaban WHERE id_soal = '" . $row["id"] . "' ORDER BY RAND()  "); ?>
+
     <div class="container">
-      <div class="row text-center alert-danger" style="padding:20px;">
-        <h5 class="col-sm-12 countdown" style="font-weight: 800; font-size:20px">Waktu Pengerjaan</h5>
-      </div>
-    </div>
-    <div class="container" style="background-color: white; padding:50px">
-      <form id="form_jawab" method="POST" action="">
-        <h2><?= $no; ?>. <?= $row['soal']; ?></h2>
-
-        <div class="kotak">
-
-          <?php
-          $total = mysqli_num_rows($jawaban);
-          while ($rowjwb = mysqli_fetch_assoc($jawaban)) :
-
-            if ($total == 4) {
-              $abjad = 'A';
-            } elseif ($total == 3) {
-              $abjad = 'B';
-            } elseif ($total == 2) {
-              $abjad = 'C';
-            } else {
-              $abjad = 'D';
-            }
-          ?>
-
-            <div class="row">
-              <div class="col-md-6">
-                <input type="hidden" id="id" name="id" value="<?= $row['id'] ?>">
-                <input type="hidden" name="sementara" value="0">
-                <div class="input-group" style="padding:2px;">
-                  <span class="input-group-addon">
-                    <input class="cursor" type="radio" id="jawaban_<?= $no; ?>" name="jawaban" value="<?= $rowjwb['opsi_jawaban'] ?>">
-                  </span>
-                  <input type="text" class="form-control" value="<?= $abjad . '. ' . $rowjwb['opsi_jawaban'] ?>" readonly>
+      <div class="row">
+        <div class="col-xl-12 col-md-12 mb-4">
+          <div class="card border-left-danger  alert-danger shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2 text-center">
+                  <h5 class="col-sm-12 countdown" style="font-weight: 800; font-size:20px">Waktu Pengerjaan</h5>
                 </div>
               </div>
             </div>
-
-          <?php $total--;
-          endwhile; ?>
+          </div>
         </div>
-        <br>
-        <button id="btn_pilih_<?= $no; ?>" class="btn btn-lg btn-success">Pilih</button>
+      </div>
+    </div>
 
-      </form>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-md-12 mb-4">
+          <div class="card border-left-primary alert-info shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <form id="form_jawab" method="POST" action="">
+                    <h2><?= $no; ?>. <?= $row['soal']; ?></h2>
+
+                    <div class="kotak">
+
+                      <?php
+                      $total = mysqli_num_rows($jawaban);
+                      while ($rowjwb = mysqli_fetch_assoc($jawaban)) :
+
+                        if ($total == 4) {
+                          $abjad = 'A';
+                        } elseif ($total == 3) {
+                          $abjad = 'B';
+                        } elseif ($total == 2) {
+                          $abjad = 'C';
+                        } else {
+                          $abjad = 'D';
+                        }
+                      ?>
+
+                        <div class="row ml-4">
+                          <div class="col-md-12">
+                            <input type="hidden" id="id" name="id" value="<?= $row['id'] ?>">
+                            <input type="hidden" name="sementara" value="0">
+                            <div class="input-group" style="padding:2px;">
+                              <span class="input-group-addon">
+                                <input class="cursor" type="radio" id="jawaban_<?= $no; ?>" name="jawaban" value="<?= $rowjwb['opsi_jawaban'] ?>"><?= '    ' . $abjad . '. ' . $rowjwb['opsi_jawaban'] ?>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                      <?php $total--;
+                      endwhile; ?>
+                    </div>
+                    <br>
+                    <button id="btn_pilih_<?= $no; ?>" class="btn btn-lg btn-primary ml-4">Simpan Jawaban</button>
+
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
 <?php
@@ -148,3 +171,15 @@ if ($jmlJawabUser == $jumlahSoal) {
     echo "<script>window.location='" . base_url('dashboard/index.php?tes') . "'</script>";
   }
 }
+?>
+
+<script>
+  $(document).ready(function() {
+    $(window).keydown(function(event) {
+      if (event.keyCode == 116) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  });
+</script>
